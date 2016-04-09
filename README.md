@@ -35,3 +35,13 @@ If you want to pass an arguments to the next "Promise chain", please pass the fi
       .then((firstView) => console.log(firstView))
       ;
 ```
+
+This code is equivalent below:
+
+```js
+    page.load()
+      .then(() => page.openDialog(1, 10)) //openDialog returns `firstView` instance to the next promise.
+      .then((firstView) => pauser.pause().then(() => firstView))
+      .then((firstView) => console.log(firstView))
+      ;
+```
